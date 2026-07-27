@@ -2,18 +2,8 @@ import azure.functions as func
 
 app = func.FunctionApp()
 
-# Root redirect to /api/cv
-@app.route(route="", auth_level=func.AuthLevel.ANONYMOUS)
-def root_redirect(req: func.HttpRequest) -> func.HttpResponse:
-    return func.HttpResponse(
-        status_code=302,
-        headers={"Location": "/api/cv"}
-    )
-
-# HTML Resume endpoint to prevent browser search hijacks
-@app.route(route="cv", auth_level=func.AuthLevel.ANONYMOUS)
-def get_cv(req: func.HttpRequest) -> func.HttpResponse:
-    html_content = """<!DOCTYPE html>
+# HTML Resume content
+HTML_CONTENT = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -45,7 +35,7 @@ def get_cv(req: func.HttpRequest) -> func.HttpResponse:
         </div>
 
         <h2>Professional Summary</h2>
-        <p>Aspiring DevOps and Cloud Engineer with a BSc in Mathematics, Electronics & Computer Science and hands-on DevOps training covering containerization, orchestration, infrastructure as code, and CI/CD automation. Built and deployed cloud-hosted, containerized applications end-to-end, including a serverless REST API on Azure Functions with an automated GitHub Actions pipeline. Currently pursuing the Microsoft Azure AZ-104 certification. Seeking an entry-level DevOps/Cloud Engineer role or internship to apply and grow these skills in a production environment.</p>
+        <p>Aspiring DevOps and Cloud Engineer with a BSc in Mathematics, Electronics & Computer Science and hands-on DevOps training covering containerization, orchestration, infrastructure as code, and CI/CD automation. Built and deployed cloud-hosted, containerized applications end-to-end, including a serverless REST API on Azure Functions with an automated GitHub Actions pipeline. Currently pursuing the Microsoft Azure AZ-104 certification. Seeking an entry-level DevOps/Cloud Engineer role or internship to apply and grow these skills in a production environment[cite: 1].</p>
 
         <h2>Technical Skills</h2>
         <div class="skills-grid">
@@ -88,8 +78,27 @@ def get_cv(req: func.HttpRequest) -> func.HttpResponse:
 </body>
 </html>
 """
+
+# Route 1: Catch-all for main endpoint and API routes
+@app.route(route="cv", auth_level=func.AuthLevel.ANONYMOUS)
+def get_cv(req: func.HttpRequest) -> func.HttpResponse:
     return func.HttpResponse(
-        body=html_content,
+        body=HTML_CONTENT,
         status_code=200,
-        headers={"Content-Type": "text/html; charset=utf-8"}
+        headers={
+            "Content-Type": "text/html; charset=utf-8",
+            "Cache-Control": "no-cache"
+        }
+    )
+
+# Route 2: Catch root visitors and send them straight to CV
+@app.route(route="", auth_level=func.AuthLevel.ANONYMOUS)
+def root_redirect(req: func.HttpRequest) -> func.HttpResponse:
+    return func.HttpResponse(
+        body=HTML_CONTENT,
+        status_code=200,
+        headers={
+            "Content-Type": "text/html; charset=utf-8",
+            "Cache-Control": "no-cache"
+        }
     )
