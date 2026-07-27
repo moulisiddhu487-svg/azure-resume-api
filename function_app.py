@@ -3,6 +3,13 @@ import json
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
+@app.route(route="", auth_level=func.AuthLevel.ANONYMOUS)
+def root_redirect(req: func.HttpRequest) -> func.HttpResponse:
+    return func.HttpResponse(
+        status_code=302,
+        headers={"Location": "/api/cv"}
+    )
+    
 @app.route(route="cv")
 def get_resume(req: func.HttpRequest) -> func.HttpResponse:
     
