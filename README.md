@@ -6,6 +6,11 @@
 
 `Azure Functions` · `GitHub Actions` · `Serverless`
 
+[![Deploy status](https://github.com/moulisiddhu487-svg/azure-resume-api/actions/workflows/deploy.yml/badge.svg)](https://github.com/moulisiddhu487-svg/azure-resume-api/actions/workflows/deploy.yml)
+[![License: MIT](https://img.shields.io/github/license/moulisiddhu487-svg/azure-resume-api)](LICENSE)
+![Python 3.10](https://img.shields.io/badge/Python-3.10-blue?logo=python&logoColor=white)
+![Last commit](https://img.shields.io/github/last-commit/moulisiddhu487-svg/azure-resume-api)
+
 **[🔗 Live Endpoint](https://resume-api-30847.azurewebsites.net/api/cv)** &nbsp;|&nbsp; **[💻 GitHub Repo](https://github.com/moulisiddhu487-svg/azure-resume-api)**
 
 </div>
