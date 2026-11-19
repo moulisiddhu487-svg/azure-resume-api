@@ -92,8 +92,7 @@ RESUME_DATA = {
       "highlights": [
         "Practiced CI/CD pipeline concepts using GitHub Actions for automated build and deployment workflows."
       ],
-      "keywords": ["Docker", "GitHub Actions", "Linux"],
-      "url": "[Add GitHub repo link]"
+      "keywords": ["Docker", "GitHub Actions", "Linux"]
     }
   ],
   "certificates": [
